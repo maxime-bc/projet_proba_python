@@ -1,5 +1,5 @@
 # projet_proba_python
 
 TODO : 
-- check random functions\
-- add comments\
+- check random functions
+- add comments
