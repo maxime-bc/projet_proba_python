@@ -1,6 +1,11 @@
 import random
 
 
+START_VALUE: float = -10.0
+STOP_VALUE: float = 10.0
+STEP_VALUE: float = 0.5
+
+
 def randrange_step(start, stop, step):
     return random.randint(0, int((stop - start) / step)) * step + start
     # TODO: same problem in C: -10 not in the interval
