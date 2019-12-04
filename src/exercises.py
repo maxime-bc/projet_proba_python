@@ -1,4 +1,5 @@
 from math import isnan
+from typing import Tuple
 
 from src.format import format_quadratic_equation, format_pow1, format_pow2, format_trigo1, format_trigo2, format_trigo3, \
     format_log
@@ -222,3 +223,64 @@ def log1() -> float:
     return res
 
 
+def edit_exercises_weights(weight_ex1: int, weight_ex2: int) -> Tuple[int, int]:
+
+    weight: int
+    print("--- Poids actuels --- \n "
+          "ex1 = {}\n "
+          "ex2 = {}\n".format(weight_ex1, weight_ex2))
+    print("Choisissez le poids de l'ex 1, celui de l'ex 2 sera ajusté automatiquement (q pour quitter):\n")
+    print("Le poids doit être compris entre 1 et 10 : \n")
+    weight = input()
+
+    while weight < 0or weight > 10:
+        print("Le poids doit être compris entre 1 et 10 : \n")
+        weight = input()
+
+    weight_ex1 = weight
+    weight_ex2 = 10-weight
+    print("Nouveaux poids : \n "
+          "ex1 = {}\n "
+          "ex2 = {}\n".format(weight_ex1, weight_ex2))
+
+    return weight_ex1, weight_ex2
+
+
+def edit_ex2_weights(weight_1: int, weight_2: float, weight_3: float) -> Tuple[float, float, float]:
+
+    print("--- Poids actuels --- \n"
+          "Fonctions puissance = {}\n"
+          "Fonctions trigonométriques = {}\n"
+          "Fonctions logarithmiques : {}\n".format(weight_1, weight_2, weight_3))
+
+    print("Choisissez les poids pour les exercices sur les fonctions puissances et trigonométriques, "
+          "celui des fonctions logarithmiques sera ajusté automatiquement (q pour quitter):\n")
+
+    weight_1_choice: int = input('1 - Entrez le poids des fonctions puissance (compris entre 1 et 15) : \n')
+    while weight_1_choice < 0 or weight_1_choice > 15:
+        weight_1_choice = input('1 - Entrez le poids des fonctions puissance (compris entre 1 et 15) : \n')
+
+    if weight_1_choice != 15:
+        weight_2_choice: int = input("2 - Entrez les 2 poids (ils doivent être compris entre 1 et 15) : \n")
+        while weight_2_choice < 1 or weight_2_choice > (15 - weight_1):
+            weight_2_choice: int = input("2 - Entrez les 2 poids (ils doivent être compris entre 1 et 15) : \n")
+
+    else:
+        weight_2_choice = 0
+        print("2 - Poids des fonctions logarithmiques automatiquement passé à {}\n".format(weight_2_choice))
+
+    weight_3_choice: int = 15 - (weight_1_choice + weight_2_choice)
+    print("3 - Poids des fonctions logarithmiques automatiquement passé à {}\n".format(weight_3_choice))
+
+    return weight_1_choice, weight_2_choice, weight_3_choice
+
+
+# WIP
+def integer_input(message: str) -> int:
+
+    user_input = input(message)
+
+    while not user_input.isdigit():
+        user_input = input(message)
+
+    return user_input
