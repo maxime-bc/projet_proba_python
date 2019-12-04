@@ -25,41 +25,41 @@ def exercise_1(score: float, max_score: float) -> Tuple[float, float]:
 
     res1, res2, solutions_num = solve_quadratic_equation(a, b, c)
 
-    print('RES 1 = {}, RES 2 = {}, SOLS = {}'.format(res1, res2, solutions_num))
-    print('ROUNDED 1 = {}, ROUNDED 2 = {}'.format(round_double(res1), round_double(res2)))
-
-    print("Equation du 2nd dégré générée : \n")
+    print('Equation du 2nd dégré générée : \n')
     format_quadratic_equation(a, b, c)
-    print("Entrez la/les solution(s) ou n si il n'y en a pas (arrondir au centième).\n")
+    print('Entrez la/les solution(s) ou n si il n\'y en a pas (arrondir au centième).\n')
 
     if solutions_num == 0:
 
+        print('No sol')
         answer = input()
 
         if answer == 'n':
-            print("Bravo ! \n En effet, cette équation n'a pas de solutions.\n")
+            print('Bravo ! \nEn effet, cette équation n\'a pas de solutions.\n')
             score = score + 1.0
             max_score = max_score + 1.0
 
         else:
-            print("Faux ! \n Cette équation ne possède pas de solutions.\n")
+            print('Faux ! \nCette équation ne possède pas de solutions.\n')
             max_score = max_score + 1.0
 
     elif solutions_num == 1:
 
-        answer = float_input(loop=False)
+        print('RES 1 = {}'.format(res1))
+        answer = float_input(fail_message='La saisie ne représente pas un nombre flottant !')
 
         if answer == res1:
-            print("Bravo ! \n En effet, cette équation possède une solution : {:0.2f}\n".format(res1))
+            print('Bravo ! \nEn effet, cette équation possède une solution : {:0.2f}\n'.format(res1))
             score = score + 1.0
             max_score = max_score + 1.0
 
         else:
-            print("Faux ! \n Cette équation possède une solution : {:0.2f}\n".format(res1))
+            print('Faux ! \nCette équation possède une solution : {:0.2f}\n'.format(res1))
             max_score = max_score + 1.0
 
     else:
 
+        print('RES 1 = {}, RES 2 = {}'.format(res1, res2))
         answer = input().split(' ', 1)
 
         if len(answer) == 1:
@@ -70,26 +70,27 @@ def exercise_1(score: float, max_score: float) -> Tuple[float, float]:
             answer2 = float(answer[1])
 
             if answer1 == res1 and answer2 == res2:
-                print("Bravo ! \n En effet, cette équation possède deux solutions : "
-                      "{:0.2f} et {:0.2f}\n".format(res1, res2))
+                print('Bravo ! \nEn effet, cette équation possède deux solutions : '
+                      '{:0.2f} et {:0.2f}\n'.format(res1, res2))
                 score = score + 1.0
                 max_score = max_score + 1.0
 
             else:
 
                 if answer1 == res2 and answer2 == res1:
-                    print("Bravo ! \n En effet, cette équation possède deux solutions : "
-                          "{:0.2f} et {:0.2f}\n".format(res1, res2))
+                    print('Bravo ! \nEn effet, cette équation possède deux solutions : '
+                          '{:0.2f} et {:0.2f}\n'.format(res1, res2))
                     score = score + 1.0
                     max_score = max_score + 1.0
 
                 else:
-                    print("Faux ! \n Cette équation possède deux solutions : "
-                          "{:0.2f} et {:0.2f}\n".format(res1, res2))
+                    print('Faux ! \nCette équation possède deux solutions : '
+                          '{:0.2f} et {:0.2f}\n'.format(res1, res2))
                     max_score = max_score + 1.0
 
         except ValueError:
-            print('Erreur de saisie')
+            print('Faux ! \nCette équation possède deux solutions : {:0.2f} et {:0.2f}\n'.format(res1, res2))
+            max_score = max_score + 1.0
 
     return score, max_score
 
@@ -103,15 +104,15 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
 
     while choice != 'q':
 
-        print("\nIntégration sur R\n")
-        print("Poids actuels : "
-              "Fonctions puissance : {}\n"
-              "Fonctions trigonométriques : {}\n"
-              "Fonctions logarithmiques : {}\n".format(weight_1, weight_2, weight_3))
+        print('\nIntégration sur R\n')
+        print('Poids actuels : '
+              'Fonctions puissance : {}\n'
+              'Fonctions trigonométriques : {}\n'
+              'Fonctions logarithmiques : {}\n'.format(weight_1, weight_2, weight_3))
 
-        print("p = Changer les poids des exercices\n"
-              "c = Commencer un exercice\n"
-              "q = Revenir au menu\n")
+        print('p = Changer les poids des exercices\n'
+              'c = Commencer un exercice\n'
+              'q = Revenir au menu\n')
 
         choice = input()
 
@@ -122,7 +123,7 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
 
             if random <= weight_1:
 
-                print("Fonction puissance\n")
+                print('Fonction puissance\n')
                 random: float = randrange_step(1.0, 2.0, 1.0)
 
                 if random == 1:
@@ -131,12 +132,12 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
                 else:
                     res = pow2()
 
-                print("{:0.2f}\n".format(round(res)))
-                score, max_score = check_exercise2_answers(round(res), score, max_score, HARD_EXERCISE)
+                print('{:0.2f}\n'.format(res))
+                score, max_score = check_exercise2_answers(round_double(res), score, max_score, HARD_EXERCISE)
 
             elif weight_1 < random <= (weight_1 + weight_2):
 
-                print("Fonction trigonométrique\n")
+                print('Fonction trigonométrique\n')
 
                 random: int = randrange_step(1.0, 3.0, 1.0)
 
@@ -149,32 +150,32 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
                 else:
                     res = trigo3()
 
-                print("{:0.2f}\n".format(round(res)))
-                score, max_score = check_exercise2_answers(round(res), score, max_score, NORMAL_EXERCISE)
+                print('{:0.2f}\n'.format(res))
+                score, max_score = check_exercise2_answers(round_double(res), score, max_score, NORMAL_EXERCISE)
 
             else:
-                print("Fonction logarithmique\n")
+                print('Fonction logarithmique\n')
                 res = log1()
 
-                print("{:0.2f}\n".format(res))
-                score, max_score = check_exercise2_answers(round(res), score, max_score, NORMAL_EXERCISE)
+                print('{:0.2f}\n'.format(res))
+                score, max_score = check_exercise2_answers(round_double(res), score, max_score, NORMAL_EXERCISE)
 
         elif choice == 'p':
             pass
             weight_1, weight_2, weight_3 = edit_ex2_weights(weight_1, weight_2, weight_3)
 
         elif choice != 'q':
-            print("{} n'est pas un choix reconnu\n".format(choice))
+            print('{} n\'est pas un choix reconnu\n'.format(choice))
 
     return score, max_score
 
 
-def check_exercise2_answers(res: float, score: float, max_score: float, difficulty: int) -> Tuple[float, float]:
+def check_exercise2_answers(rounded_res: float, score: float, max_score: float, difficulty: int) -> Tuple[float, float]:
 
-    answer: float = float_input(loop=False)
+    answer: float = float_input(fail_message='La saisie ne représente pas un nombre flottant !')
 
-    if round_double(res) == answer:
-        print("Bravo ! \n En effet, cette intégrale vaut {:0.2f}\n".format(res))
+    if rounded_res == answer:
+        print('Bravo ! \n En effet, cette intégrale vaut {:0.2f}\n'.format(rounded_res))
 
         if difficulty == NORMAL_EXERCISE:
             score = score + 1.0
@@ -185,7 +186,7 @@ def check_exercise2_answers(res: float, score: float, max_score: float, difficul
             max_score = max_score + 1.5
 
     else:
-        print("Faux ! \n Cette intégrale vaut {:0.2f}\n".format(res))
+        print('Faux ! \n Cette intégrale vaut {:0.2f}\n'.format(rounded_res))
 
         if difficulty == NORMAL_EXERCISE:
             max_score = max_score + 1.0
@@ -268,35 +269,35 @@ def header(a: float, b: float) -> None:
 def edit_exercises_weights(weight_ex1: int, weight_ex2: int) -> Tuple[int, int]:
 
     weight: int
-    print("--- Poids actuels --- \n "
-          "ex1 = {}\n "
-          "ex2 = {}\n".format(weight_ex1, weight_ex2))
-    print("Choisissez le poids de l'ex 1, celui de l'ex 2 sera ajusté automatiquement (q pour quitter):\n")
-    print("Le poids doit être compris entre 0 et 10 : \n")
+    print('--- Poids actuels --- \n '
+          'ex1 = {}\n '
+          'ex2 = {}\n'.format(weight_ex1, weight_ex2))
+    print('Choisissez le poids de l\'ex 1, celui de l\'ex 2 sera ajusté automatiquement (q pour quitter):\n')
+    print('Le poids doit être compris entre 0 et 10 : \n')
     weight = int_input()
 
     while weight < 0 or weight > 10:
-        print("Le poids doit être compris entre 0 et 10 : \n")
+        print('Le poids doit être compris entre 0 et 10 : \n')
         weight = int_input()
 
     weight_ex1 = weight
     weight_ex2 = 10-weight
-    print("Nouveaux poids : \n "
-          "ex1 = {}\n "
-          "ex2 = {}\n".format(weight_ex1, weight_ex2))
+    print('Nouveaux poids : \n '
+          'ex1 = {}\n '
+          'ex2 = {}\n'.format(weight_ex1, weight_ex2))
 
     return weight_ex1, weight_ex2
 
 
 def edit_ex2_weights(weight_1: int, weight_2: float, weight_3: float) -> Tuple[float, float, float]:
 
-    print("--- Poids actuels --- \n"
-          "Fonctions puissance = {}\n"
-          "Fonctions trigonométriques = {}\n"
-          "Fonctions logarithmiques : {}\n".format(weight_1, weight_2, weight_3))
+    print('--- Poids actuels --- \n'
+          'Fonctions puissance = {}\n'
+          'Fonctions trigonométriques = {}\n'
+          'Fonctions logarithmiques : {}\n'.format(weight_1, weight_2, weight_3))
 
-    print("Choisissez les poids pour les exercices sur les fonctions puissances et trigonométriques, "
-          "celui des fonctions logarithmiques sera ajusté automatiquement (q pour quitter):\n")
+    print('Choisissez les poids pour les exercices sur les fonctions puissances et trigonométriques, '
+          'celui des fonctions logarithmiques sera ajusté automatiquement (q pour quitter):\n')
 
     print('1 - Entrez le poids des fonctions puissance (compris entre 1 et 15) : \n')
     weight_1_choice: int = int_input()
@@ -313,9 +314,9 @@ def edit_ex2_weights(weight_1: int, weight_2: float, weight_3: float) -> Tuple[f
 
     else:
         weight_2_choice = 0
-        print("2 - Poids des fonctions trigonométriques automatiquement passé à {}\n".format(weight_2_choice))
+        print('2 - Poids des fonctions trigonométriques automatiquement passé à {}\n'.format(weight_2_choice))
 
     weight_3_choice: int = 15 - (weight_1_choice + weight_2_choice)
-    print("3 - Poids des fonctions logarithmiques automatiquement passé à {}\n".format(weight_3_choice))
+    print('3 - Poids des fonctions logarithmiques automatiquement passé à {}\n'.format(weight_3_choice))
 
     return weight_1_choice, weight_2_choice, weight_3_choice

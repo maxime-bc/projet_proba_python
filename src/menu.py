@@ -8,16 +8,16 @@ def menu() -> None:
     score: float = 0.0
     max_score: float = 0.0
 
-    weight_1: int = 10
-    weight_2: int = 0
+    weight_1: int = 0
+    weight_2: int = 10
 
     while choice != 'q':
 
-        print("\n Menu --- "
-              "Score : {}/{} ---\n "
-              "c = Commencer \n "
-              "p = Changer les poids des exercices\n "
-              "q = Quitter\n\n".format(score, max_score))
+        print('\n Menu --- '
+              'Score : {}/{} ---\n '
+              'c = Commencer \n '
+              'p = Changer les poids des exercices\n '
+              'q = Quitter\n\n'.format(score, max_score))
 
         choice = input()
         random: int = randrange_step(0, 10, 1)
