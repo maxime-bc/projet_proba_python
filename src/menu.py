@@ -1,4 +1,5 @@
-from src.rand import randrange_step
+from src.exercises import exercise_1, exercise_2, edit_exercises_weights
+from src.rand import randrange_step, START_VALUE, STOP_VALUE, STEP_VALUE
 
 
 def menu() -> None:
@@ -18,27 +19,20 @@ def menu() -> None:
               "q = Quitter\n\n".format(score))
 
         choice = input()
-        print(choice)
-
-        # random: int = random_with_step(1.0, 10.0, 1.0)
+        random: int = randrange_step(START_VALUE, STOP_VALUE, STEP_VALUE)
 
         if choice == 'c':
-            print('You choose c')
 
-            # if random < weight_1:
-            # pass
-            # exercise_1(score)
-            # else:
-            # pass
-            # exercise_2(score)
+            if random < weight_1:
+                exercise_1(score)
+
+            else:
+                exercise_2(score)
 
         elif choice == 'p':
-            print('You choose p')
-            # edit_exercises_weights(p_weight_ex1, p_weight_ex2)
+            weight_1, weight_2 = edit_exercises_weights(weight_1,  weight_2)
 
         elif choice != 'q':
             print('{} is not recognized as a format.'.format(choice))
-            pass
-            # printf("%c n'est pas un choix reconnu\n", choice)
 
     print('Bye !')
