@@ -8,8 +8,8 @@ def menu() -> None:
     score: float = 0.0
     max_score: float = 0.0
 
-    weight_1: int = 0
-    weight_2: int = 10
+    weight_1: int = 5
+    weight_2: int = 5
 
     while choice != 'q':
 
