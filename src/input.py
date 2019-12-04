@@ -1,8 +1,6 @@
-def int_input(loop: bool = True) -> int:
+def int_input() -> int:
 
-    test: bool = True
-
-    while test:
+    while True:
         value = input()
 
         try:
@@ -10,12 +8,7 @@ def int_input(loop: bool = True) -> int:
             return my_int
 
         except ValueError:
-
-            if loop:
-                pass
-
-            else:
-                test = False
+            print('Enter an integer to continue.\n')
 
 
 def float_input(fail_message: str = None):
