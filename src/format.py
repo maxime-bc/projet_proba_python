@@ -3,7 +3,7 @@ from math import fabs
 
 def format_quadratic_equation(a: float, b: float, c: float) -> None:
 
-    print('{:0.1f}x²'.format(a), end='')
+    print('f(x) = {:0.1f}x²'.format(a), end='')
 
     if b == 1:
         print("+x", end='')
@@ -24,10 +24,10 @@ def format_quadratic_equation(a: float, b: float, c: float) -> None:
 def format_pow1(c: float, d: float, alpha: float) -> None:
 
     if c == 1.0:
-        print("(x", end='')
+        print("f(x) = (x", end='')
 
     else:
-        print("({:0.1f}x".format(c), end='')
+        print("f(x) = ({:0.1f}x".format(c), end='')
 
     if d < 0.0:
         tmp: float = fabs(d)
@@ -103,7 +103,7 @@ def format_log(c: float):
         print("x)\n", end='')
 
     elif c == -1:
-        print("-x)\n",end='')
+        print("-x)\n", end='')
 
     else:
         print("{:0.1f}x)\n".format(c), end='')

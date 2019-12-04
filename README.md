@@ -3,3 +3,4 @@
 TODO : 
 - check random functions
 - add comments
+- TypeError: can't convert complex to float : Fonction puissance
