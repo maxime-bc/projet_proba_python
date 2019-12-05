@@ -1,5 +1,5 @@
 from src.exercises import exercise_1, exercise_2, edit_exercises_weights
-from src.rand import randrange_step, START_VALUE, STOP_VALUE, STEP_VALUE
+from src.rand import randrange_step
 
 
 def menu() -> None:
