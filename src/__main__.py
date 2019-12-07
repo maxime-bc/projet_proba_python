@@ -1,4 +1,4 @@
-from src.test_frame import Application
+from src.application import Application
 
 
 def main():
