@@ -3,7 +3,7 @@ from math import fabs
 
 def format_quadratic_equation(a: float, b: float, c: float) -> str:
 
-    formatted_equation = 'f(x) = {:0.1f}x²'.format(a)
+    formatted_equation: str = 'f(x) = {:0.1f}x²'.format(a)
 
     if b == 1:
         formatted_equation += '+x'
@@ -21,89 +21,103 @@ def format_quadratic_equation(a: float, b: float, c: float) -> str:
     return formatted_equation
 
 
-def format_pow1(c: float, d: float, alpha: float) -> None:
+def format_pow(c: float, d: float, alpha: float) -> str:
+
+    formatted_equation: str = ''
 
     if c == 1.0:
-        print("f(x) = (x", end='')
+        formatted_equation += 'f(x) = (x'
 
     else:
-        print("f(x) = ({:0.1f}x".format(c), end='')
+        formatted_equation += 'f(x) = ({:0.1f}x'.format(c)
 
     if d < 0.0:
         tmp: float = fabs(d)
-        print("+{:0.1f})^{:0.1f}\n".format(tmp, alpha), end='')
+        formatted_equation += '+{:0.1f})^{:0.1f}\n'.format(tmp, alpha)
 
     else:
-        print("-{:0.1f})^{:0.1f}\n".format(d, alpha), end='')
+        formatted_equation += '-{:0.1f})^{:0.1f}\n'.format(d, alpha)
+
+    return formatted_equation
 
 
-def format_pow2(c: float) -> None:
+def format_inverse(c: float) -> str:
 
-    print("f(x) = 1/", end='')
+    formatted_equation: str = 'f(x) = 1/'
 
     if c == 0.0:
-        print("x\n", end='')
+        formatted_equation += 'x\n'
 
     else:
         if c < 0.0:
             tmp: float = fabs(c)
-            print("(x+{:0.1f})\n".format(tmp), end='')
+            formatted_equation += '(x+{:0.1f})\n'.format(tmp)
 
         else:
-            print("(x-{:0.1f})\n".format(c), end='')
+            formatted_equation += '(x-{:0.1f})\n'.format(c)
+
+    return formatted_equation
 
 
-def format_trigo1(c: float):
+def format_cos(c: float) -> str:
 
-    print("f(x) = cos(", end='')
-
-    if c == 1:
-        print("x)\n", end='')
-
-    elif c == -1:
-        print("-x)\n", end='')
-
-    else:
-        print("{:0.1f}x)\n".format(c), end='')
-
-
-def format_trigo2(c: float):
-
-    print("f(x) = sin(", end='')
+    formatted_equation: str = 'f(x) = cos('
 
     if c == 1:
-        print("x)\n", end='')
-
+        formatted_equation += 'x)\n'
+        
     elif c == -1:
-        print("-x)\n", end='')
+        formatted_equation += '-x)\n'
 
     else:
-        print("{:0.1f}x)\n".format(c), end='')
+        formatted_equation += '{:0.1f}x)\n'.format(c)
+    
+    return formatted_equation
 
 
-def format_trigo3(c: float):
+def format_sin(c: float) -> str:
 
-    print("f(x) = tan(", end='')
+    formatted_equation: str = 'f(x) = sin('
 
     if c == 1:
-        print("x)", end='')
+        formatted_equation += 'x)\n'
 
     elif c == -1:
-        print("-x)", end='')
+        formatted_equation += '-x)\n'
 
     else:
-        print("{:0.1f}x)\n".format(c), end='')
+        formatted_equation += '{:0.1f}x)\n'.format(c)
+
+    return formatted_equation
 
 
-def format_log(c: float):
+def format_tan(c: float) -> str:
 
-    print("f(x) = ln(", end='')
+    formatted_equation: str = 'f(x) = tan('
 
     if c == 1:
-        print("x)\n", end='')
+        formatted_equation += 'x)'
 
     elif c == -1:
-        print("-x)\n", end='')
+        formatted_equation += '-x)'
 
     else:
-        print("{:0.1f}x)\n".format(c), end='')
+        formatted_equation += '{:0.1f}x)\n'.format(c)
+
+    return formatted_equation
+
+
+def format_log(c: float) -> str:
+
+    formatted_equation: str = 'f(x) = ln('
+
+    if c == 1:
+        formatted_equation += 'x)\n'
+
+    elif c == -1:
+        formatted_equation += '-x)\n'
+
+    else:
+        formatted_equation += '{:0.1f}x)\n'.format(c)
+
+    return formatted_equation

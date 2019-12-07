@@ -1,7 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
-
-from src.exercises import exercise_1
 from src.format import format_quadratic_equation
 from src.quadratic_equations import solve_quadratic_equation
 from src.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE
@@ -10,7 +7,7 @@ from src.utils import round_double
 LARGE_FONT = ('Verdana', 12)
 
 
-class App(tk.Tk):
+class Application(tk.Tk):
 
     def __init__(self):
 
@@ -282,6 +279,3 @@ class Exercise2(tk.Frame):
         back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(MainPage))
         back_button.pack()
 
-
-app = App()
-app.mainloop()

@@ -1,8 +1,9 @@
-from src.menu import menu
+from src.test_frame import Application
 
 
 def main():
-    menu()
+    app = Application()
+    app.mainloop()
 
 
 if __name__ == '__main__':
