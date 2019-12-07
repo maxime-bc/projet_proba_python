@@ -12,7 +12,7 @@ class Exercise2(tk.Frame):
         self.score = self.controller.shared_data["score"]
         self.max_score = self.controller.shared_data["max_score"]
 
-        label = tk.Label(self, text="Intégrales", font=LARGE_FONT)
+        label = tk.Label(self, text="Exercice sur les intégrales", font=LARGE_FONT)
         label.pack(padx=10, pady=10)
 
         back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
