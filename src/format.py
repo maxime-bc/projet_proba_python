@@ -1,24 +1,24 @@
 from math import fabs
 
 
-def format_quadratic_equation(a: float, b: float, c: float) -> None:
+def format_quadratic_equation(a: float, b: float, c: float) -> str:
 
-    print('f(x) = {:0.1f}x²'.format(a), end='')
+    formatted_equation = 'f(x) = {:0.1f}x²'.format(a)
 
     if b == 1:
-        print("+x", end='')
+        formatted_equation += '+x'
     else:
         if b > 0.0:
-            print("+{:0.1f}x".format(b), end='')
+            formatted_equation += '+{:0.1f}x'.format(b)
         elif b < 0.0:
-            print("{:0.1f}x".format(b), end='')
+            formatted_equation += '{:0.1f}x'.format(b)
 
     if c > 0.0:
-        print("+{:0.1f}".format(c), end='')
+        formatted_equation += '+{:0.1f}'.format(c)
     elif c < 0.0:
-        print("{:0.1f}".format(c), end='')
+        formatted_equation += '{:0.1f}'.format(c)
 
-    print(" = 0\n")
+    return formatted_equation
 
 
 def format_pow1(c: float, d: float, alpha: float) -> None:
