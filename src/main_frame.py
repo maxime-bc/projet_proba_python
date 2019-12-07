@@ -34,6 +34,14 @@ class Application(tk.Frame):
     def create_window(self):
         window = tk.Toplevel(self.master)
 
+    @staticmethod
+    def hide_widget(event):
+        event.pack_forget()
+
+    @staticmethod
+    def show_widget(event):
+        event.pack()
+
     def start(self):
 
         try:
