@@ -24,10 +24,6 @@ class Exercise2(tk.Frame):
 
         self.result: float
 
-        self.weight1 = self.controller.shared_data["ex2_weight1"]
-        self.weight2 = self.controller.shared_data["ex2_weight2"]
-        self.weight3 = self.controller.shared_data["ex2_weight3"]
-
         label = tk.Label(self, text="Exercice sur les intégrales", font=LARGE_FONT)
         label.pack(padx=10, pady=10)
 
@@ -39,6 +35,9 @@ class Exercise2(tk.Frame):
         self.integral_function_label = tk.Label(self, textvar=self.integral_function_text)
         self.integral_function_label.pack()
 
+        self.message_text = tk.StringVar()
+        self.message_label = tk.Label(self, textvar=self.message_text)
+
         self.answer_label = tk.Label(self, text='Résultat :')
         self.answer_label.pack()
 
@@ -48,8 +47,16 @@ class Exercise2(tk.Frame):
         self.validate_answer = tk.Button(self, text='Valider',  command=self.validate)
         self.validate_answer.pack()
 
-        back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
-        back_button.pack()
+        self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
+        self.back_button.pack()
+
+    @staticmethod
+    def hide_widget(event):
+        event.pack_forget()
+
+    @staticmethod
+    def show_widget(event):
+        event.pack()
 
     def validate(self):
 
@@ -59,21 +66,45 @@ class Exercise2(tk.Frame):
             given_result: float = float(self.answer_entry.get())
 
             if self.result == given_result:
-                print('Bravo ! \n En effet, cette intégrale vaut {:0.2f}\n'.format(self.result))
+                self.message_text.set('Bravo ! \n En effet, cette intégrale vaut {:0.2f}\n'.format(self.result))
+
+                self.hide_widget(self.validate_answer)
+                self.hide_widget(self.back_button)
+
+                self.message_label.pack()
+                self.show_widget(self.back_button)
+
                 # TODO : add score
 
             else:
-                print('Faux ! \n Cette intégrale vaut {:0.2f}\n'.format(self.result))
+                self.message_text.set('Faux ! \n Cette intégrale vaut {:0.2f}\n'.format(self.result))
+                self.hide_widget(self.validate_answer)
+                self.hide_widget(self.back_button)
+
+                self.message_label.pack()
+                self.show_widget(self.back_button)
 
         except ValueError:
             pass
 
     def generate_exercise(self, event):
 
+        self.hide_widget(self.message_label)
+        self.hide_widget(self.validate_answer)
+        self.hide_widget(self.back_button)
+
+        self.show_widget(self.validate_answer)
+        self.show_widget(self.back_button)
+
+        weight1 = self.controller.shared_data["ex2_weight1"]
+        weight2 = self.controller.shared_data["ex2_weight2"]
+        weight3 = self.controller.shared_data["ex2_weight3"]
+
+        # TODO: the same exercise can be repeated
         random: float = randrange_step(0.0, 15.0, 1.0)
         res: float
 
-        if random <= self.weight1:
+        if random <= weight1:
 
             print('Fonction puissance\n')
             random: float = randrange_step(1.0, 2.0, 1.0)
@@ -86,9 +117,8 @@ class Exercise2(tk.Frame):
                 self.result = self.pow2()
 
             print('{:0.2f}\n'.format(self.result))
-            # score, max_score = check_exercise2_answers(round_float(res), score, max_score, HARD_EXERCISE)
 
-        elif self.weight1 < random <= (self.weight1 + self.weight2):
+        elif weight1 < random <= (weight1 + weight2):
 
             print('Fonction trigonométrique\n')
 
@@ -104,39 +134,12 @@ class Exercise2(tk.Frame):
                 self.result = self.trigo3()
 
             print('{:0.2f}\n'.format(self.result))
-            # score, max_score = check_exercise2_answers(round_float(res), score, max_score, NORMAL_EXERCISE)
 
-        else:
+        elif random > weight3:
             print('Fonction logarithmique\n')
             self.result = self.log1()
 
             print('{:0.2f}\n'.format(self.result))
-            # score, max_score = check_exercise2_answers(round_float(res), score, max_score, NORMAL_EXERCISE)
-
-
-    def check_exercise2_answers(self, rounded_res: float, score: float, max_score: float, difficulty: int) -> None:
-
-
-        if rounded_res == answer:
-            print('Bravo ! \n En effet, cette intégrale vaut {:0.2f}\n'.format(rounded_res))
-
-            if difficulty == NORMAL_EXERCISE:
-                score = score + 1.0
-                max_score = max_score + 1.0
-
-            elif difficulty == HARD_EXERCISE:
-                score = score + 1.5
-                max_score = max_score + 1.5
-
-        else:
-            print('Faux ! \n Cette intégrale vaut {:0.2f}\n'.format(rounded_res))
-
-            if difficulty == NORMAL_EXERCISE:
-                max_score = max_score + 1.0
-            elif difficulty == HARD_EXERCISE:
-                max_score = max_score + 1.5
-
-        return score, max_score
 
     def pow1(self) -> float:
         a, b, c, d, alpha = generate_pow1()

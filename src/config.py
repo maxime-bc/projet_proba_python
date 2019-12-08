@@ -50,7 +50,7 @@ class Config(tk.Frame):
         self.ex2_weight1_entry.pack()
 
         self.ex2_weight2_label = \
-            tk.Label(self, text='Poids 2 : intégrales de fonctions trigonométriques (compris \'poids1\' et 15) :')
+            tk.Label(self, text='Poids 2 : intégrales de fonctions trigonométriques (compris entre \'poids1\' et 15) :')
         self.ex2_weight2_label.pack()
         self.ex2_weight2_entry = tk.Entry(self, text=self.ex2_weight2_value)
         self.ex2_weight2_entry.pack()
@@ -80,7 +80,7 @@ class Config(tk.Frame):
             if 0 <= weight1 <= 10:
 
                 weight2: int = 10 - weight1
-                self.weight2_text.set('Poids exercice Intégrales : {}'.format(weight2))
+                self.weight2_text.set('Poids des exercices sur les intégrales : {}'.format(weight2))
                 self.weight2_label.pack()
 
                 self.controller.shared_data["weight1"] = weight1
@@ -93,7 +93,8 @@ class Config(tk.Frame):
                     if 0 <= ex2_weight2 <= (15 - ex2_weight1):
 
                         ex2_weight3: int = 15 - (ex2_weight1 + ex2_weight2)
-                        self.ex2_weight3_text.set('Poids des fonctions logarithmiques : {}'.format(ex2_weight3))
+                        self.ex2_weight3_text.set('Poids 3 : intégrales de fonctions logarithmiques : {}'
+                                                  .format(ex2_weight3))
 
                         self.controller.shared_data["ex2_weight1"] = ex2_weight1
                         self.controller.shared_data["ex2_weight2"] = ex2_weight2

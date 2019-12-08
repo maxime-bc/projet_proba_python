@@ -11,7 +11,7 @@ class Application(tk.Tk):
     def __init__(self):
 
         super().__init__()
-        self.geometry("500x400")
+        self.geometry("600x400")
         self.title('Générateur d\'exercices')
 
         container = tk.Frame(self)
