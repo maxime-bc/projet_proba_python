@@ -1,8 +1,7 @@
-# TODO : code round_double
 from typing import Tuple
 
 
-def round_double(x: float) -> float:
+def round_float(x: float) -> float:
     return round(x * 100.0) / 100.0
 
 

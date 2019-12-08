@@ -2,6 +2,8 @@ from typing import Tuple
 from src.rand import randrange_exclude, randrange_step, START_VALUE, STOP_VALUE, STEP_VALUE
 from src.utils import permute_bounds
 
+# TODO: bounds a and b must be different
+
 
 def generate_pow1() -> Tuple[float, float, float, float, float]:
 

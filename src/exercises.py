@@ -8,7 +8,7 @@ from src.input import int_input, float_input
 from src.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
 from src.quadratic_equations import solve_quadratic_equation
 from src.rand import randrange_exclude, randrange_step, START_VALUE, STOP_VALUE, STEP_VALUE
-from src.utils import round_double
+from src.utils import round_float
 
 HARD_EXERCISE = 2
 NORMAL_EXERCISE = 1
@@ -133,7 +133,7 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
                     res = pow2()
 
                 print('{:0.2f}\n'.format(res))
-                score, max_score = check_exercise2_answers(round_double(res), score, max_score, HARD_EXERCISE)
+                score, max_score = check_exercise2_answers(round_float(res), score, max_score, HARD_EXERCISE)
 
             elif weight_1 < random <= (weight_1 + weight_2):
 
@@ -151,14 +151,14 @@ def exercise_2(score: float, max_score: float) -> Tuple[float, float]:
                     res = trigo3()
 
                 print('{:0.2f}\n'.format(res))
-                score, max_score = check_exercise2_answers(round_double(res), score, max_score, NORMAL_EXERCISE)
+                score, max_score = check_exercise2_answers(round_float(res), score, max_score, NORMAL_EXERCISE)
 
             else:
                 print('Fonction logarithmique\n')
                 res = log1()
 
                 print('{:0.2f}\n'.format(res))
-                score, max_score = check_exercise2_answers(round_double(res), score, max_score, NORMAL_EXERCISE)
+                score, max_score = check_exercise2_answers(round_float(res), score, max_score, NORMAL_EXERCISE)
 
         elif choice == 'p':
             pass

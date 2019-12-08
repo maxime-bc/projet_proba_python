@@ -1,7 +1,7 @@
 from math import sqrt, fabs
 from typing import Tuple
 
-from src.utils import round_double
+from src.utils import round_float
 
 
 def two_real_root(delta: float, a: float, b: float) -> Tuple[float, float]:
@@ -21,11 +21,11 @@ def solve_quadratic_equation(a: float, b: float, c: float):
     delta: float = discriminant(a, b, c)
 
     if delta == 0.0:
-        return round_double(one_real_root(a, b)), None, 1
+        return round_float(one_real_root(a, b)), None, 1
 
     elif delta < 0.0:
         return None, None, 0
 
     else:
         root1, root2 = two_real_root(delta, a, b, )
-        return round_double(root1), round_double(root2), 2
+        return round_float(root1), round_float(root2), 2
