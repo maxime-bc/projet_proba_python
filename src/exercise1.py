@@ -19,9 +19,9 @@ class Exercise1(tk.Frame):
         self.score = self.controller.shared_data["score"]
         self.max_score = self.controller.shared_data["max_score"]
 
-        self.res1: float
-        self.res2: float
-        self.sol_no: int
+        self.res1 = None
+        self.res2 = None
+        self.sol_no = None
 
         frame_label = tk.Label(self, text="Exercice sur les équations du second degré", font=LARGE_FONT)
         frame_label.pack(padx=10, pady=10)
@@ -38,7 +38,8 @@ class Exercise1(tk.Frame):
 
         self.initial_spinbox_value = tk.DoubleVar(value=0)
         self.previous_spinbox_value = 0
-        self.sol_no_spinbox = tk.Spinbox(self, from_=0, to=2, textvariable=self.initial_spinbox_value,  command=self.on_spinbox_changed, state='readonly')
+        self.sol_no_spinbox = tk.Spinbox(self, from_=0, to=2, textvariable=self.initial_spinbox_value,
+                                         command=self.on_spinbox_changed, state='readonly')
         self.sol_no_spinbox.pack()
 
         for index in range(0, 2):
@@ -78,7 +79,8 @@ class Exercise1(tk.Frame):
         self.show_widget(self.answer_label)
         self.show_widget(self.back_button)
 
-    def set_text(self, entry, text):
+    @staticmethod
+    def set_text(entry, text):
         entry.delete(0, tk.END)
         entry.insert(0, text)
 
@@ -91,7 +93,8 @@ class Exercise1(tk.Frame):
 
         self.res1, self.res2, self.sol_no = solve_quadratic_equation(a, b, c)
 
-        self.equation_str.set('Equation du 2nd degré générée : {}\nRésoudre f(x) = 0'.format(format_quadratic_equation(a, b, c)))
+        self.equation_str.set('Equation du 2nd degré générée : {}\nRésoudre f(x) = 0'
+                              .format(format_quadratic_equation(a, b, c)))
         self.equation_label.pack()
 
         self.answer_text.set('')
@@ -129,7 +132,8 @@ class Exercise1(tk.Frame):
 
             else:
 
-                self.answer_text.set('Faux ! \nVous avez choisi {} solution(s), or cette équation n\'en possède pas.\n'.format(given_sol_no))
+                self.answer_text.set('Faux ! \nVous avez choisi {} solution(s), or cette équation n\'en possède pas.\n'
+                                     .format(given_sol_no))
                 self.max_score = self.max_score + 1.0
 
             self.hide_entries()
@@ -142,14 +146,14 @@ class Exercise1(tk.Frame):
                 answer1 = float(self.entry_array[0].get())
 
                 if answer1 == rounded_res1:
-                    self.answer_text.set('Bravo ! \nEn effet, cette équation possède une solution : ' \
+                    self.answer_text.set('Bravo ! \nEn effet, cette équation possède une solution : '
                                          '{:0.2f}\n'.format(rounded_res1))
                     self.score = self.score + 1.0
                     self.max_score = self.max_score + 1.0
 
                 else:
-                    self.answer_text.set('Faux ! \nCette équation possède une solution : ' \
-                                       '{:0.2f}\n'.format(rounded_res1))
+                    self.answer_text.set('Faux ! \nCette équation possède une solution : '
+                                         '{:0.2f}\n'.format(rounded_res1))
                     self.max_score = self.max_score + 1.0
 
                 self.hide_entries()
@@ -169,22 +173,22 @@ class Exercise1(tk.Frame):
                     answer2 = float(self.entry_array[1].get())
 
                     if answer1 == rounded_res1 and answer2 == rounded_res2:
-                        self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : ' \
-                                           '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                        self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : '
+                                             '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
                         self.score = self.score + 1.0
                         self.max_score = self.max_score + 1.0
 
                     else:
 
                         if answer1 == rounded_res1 and answer2 == rounded_res1:
-                            self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : ' \
-                                               '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                            self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : '
+                                                 '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
                             self.score = self.score + 1.0
                             self.max_score = self.max_score + 1.0
 
                         else:
-                            self.answer_text.set('Faux ! \nCette équation possède deux solutions : ' \
-                                               '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                            self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
+                                                 '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
                             self.max_score = self.max_score + 1.0
 
                     self.hide_entries()
@@ -194,8 +198,8 @@ class Exercise1(tk.Frame):
                     self.answer_text.set('La saisie ne représente pas un nombre flottant !')
                     self.show_widget(self.answer_label)
             else:
-                self.answer_text.set('Faux ! \nCette équation possède deux solutions : ' \
-                                               '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
+                                     '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
                 self.max_score = self.max_score + 1.0
                 self.hide_entries()
                 self.show_answers()
@@ -210,7 +214,7 @@ class Exercise1(tk.Frame):
 
         if actual_spinbox_value > self.previous_spinbox_value:
             self.show_widget(self.label_array[actual_spinbox_value - 1])
-            self.show_widget(self.entry_array[actual_spinbox_value-1])
+            self.show_widget(self.entry_array[actual_spinbox_value - 1])
             self.previous_spinbox_value = actual_spinbox_value
 
         elif actual_spinbox_value < self.previous_spinbox_value:

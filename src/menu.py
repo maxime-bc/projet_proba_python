@@ -14,26 +14,45 @@ class Menu(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
-
-        self.weight1 = self.controller.shared_data["weight1"]
-        self.weight1_bind = tk.IntVar()
-        self.weight1_bind.set(self.weight1)
+        self.bind("<<ShowFrame>>", self.on_show_frame)
 
         self.title_label = tk.Label(self, text='Générateur d\'exercices', font=TITLE_FONT)
         self.title_label.pack(padx=10, pady=10)
 
-        start_button = tk.Button(self, text='Commencer', command=self.start)
-        start_button.pack()
+        self.score_text = tk.StringVar()
+        self.score_label = tk.Label(self, textvar=self.score_text)
 
-        config_button = tk.Button(self, text='Configurer les poids des exercices', command=self.config)
-        config_button.pack()
+        self.start_button = tk.Button(self, text='Commencer', command=self.start)
+        self.start_button.pack()
+
+        self.config_button = tk.Button(self, text='Configurer les poids des exercices', command=self.config)
+        self.config_button.pack()
+
+    def on_show_frame(self, event):
+        # update the score
+
+        print('Showed')
+
+        self.start_button.pack_forget()
+        self.config_button.pack_forget()
+
+        self.score_text.set('Score : {}/{}'.
+                            format(self.controller.shared_data["score"], self.controller.shared_data["max_score"]))
+
+        self.score_label.pack()
+        self.start_button.pack()
+        self.config_button.pack()
 
     def config(self):
         self.controller.show_frame(src.config.Config)
 
     def start(self):
 
-        print('WEIGHTS :'+str(self.controller.shared_data["weight1"]) + ' ' + str(self.controller.shared_data["weight2"]))
+        print('SCORE :' + str(self.controller.shared_data["score"]) + ', MAX SCORE : '
+              + str(self.controller.shared_data["max_score"]))
+
+        print('WEIGHTS :'+str(self.controller.shared_data["weight1"]) + ' '
+              + str(self.controller.shared_data["weight2"]))
 
         random: int = randrange_step(0, 10, 1)
         print(random)
