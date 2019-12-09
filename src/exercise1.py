@@ -52,32 +52,24 @@ class Exercise1(tk.Frame):
         self.answer_text = tk.StringVar()
         self.answer_label = tk.Label(self, textvariable=self.answer_text)
 
-    @staticmethod
-    def hide_widget(event):
-        event.pack_forget()
-
-    @staticmethod
-    def show_widget(event):
-        event.pack()
-
     def show_entries(self):
         for index in range(0, int(self.sol_no_spinbox.get())):
-            self.show_widget(self.entry_array[index])
-            self.show_widget(self.label_array[index])
+            self.entry_array[index].pack()
+            self.label_array[index].pack()
 
-        self.show_widget(self.validate_button)
-        self.show_widget(self.back_button)
+        self.validate_button.pack()
+        self.back_button.pack()
 
     def hide_entries(self):
         for index in range(0, int(self.sol_no_spinbox.get())):
-            self.hide_widget(self.entry_array[index])
-            self.hide_widget(self.label_array[index])
+            self.entry_array[index].pack_forget()
+            self.label_array[index].pack_forget()
 
-        self.hide_widget(self.validate_button)
+        self.validate_button.pack_forget()
 
     def show_answers(self):
-        self.show_widget(self.answer_label)
-        self.show_widget(self.back_button)
+        self.answer_label.pack()
+        self.back_button.pack()
 
     @staticmethod
     def set_text(entry, text):
@@ -98,17 +90,17 @@ class Exercise1(tk.Frame):
         self.equation_label.pack()
 
         self.answer_text.set('')
-        self.hide_widget(self.answer_label)
+        self.answer_label.pack_forget()
 
         self.set_text(self.entry_array[0], '')
         self.set_text(self.entry_array[1], '')
         self.initial_spinbox_value = tk.DoubleVar(value=0)
         self.sol_no_spinbox.pack()
-        self.hide_widget(self.entry_array[0])
-        self.hide_widget(self.label_array[1])
+        self.entry_array[0].pack_forget()
+        self.label_array[1].pack_forget()
 
-        self.show_widget(self.validate_button)
-        self.show_widget(self.back_button)
+        self.validate_button.pack()
+        self.back_button.pack()
 
         # DEBUG ONLY
         print('NB SOL : '+str(self.sol_no))
@@ -161,7 +153,6 @@ class Exercise1(tk.Frame):
 
             except ValueError:
                 self.answer_text.set('La saisie ne représente pas un nombre flottant !')
-                self.show_widget(self.answer_label)
 
         elif self.sol_no == 2:
             rounded_res1 = round_float(self.res1)
@@ -196,7 +187,7 @@ class Exercise1(tk.Frame):
 
                 except ValueError:
                     self.answer_text.set('La saisie ne représente pas un nombre flottant !')
-                    self.show_widget(self.answer_label)
+
             else:
                 self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
                                      '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
@@ -206,22 +197,22 @@ class Exercise1(tk.Frame):
 
     def on_spinbox_changed(self):
 
-        self.hide_widget(self.answer_label)
-        self.hide_widget(self.validate_button)
-        self.hide_widget(self.back_button)
+        self.answer_label.pack_forget()
+        self.validate_button.pack_forget()
+        self.back_button.pack_forget()
 
         actual_spinbox_value = int(self.sol_no_spinbox.get())
 
         if actual_spinbox_value > self.previous_spinbox_value:
-            self.show_widget(self.label_array[actual_spinbox_value - 1])
-            self.show_widget(self.entry_array[actual_spinbox_value - 1])
+            self.label_array[actual_spinbox_value - 1].pack()
+            self.entry_array[actual_spinbox_value - 1].pack()
             self.previous_spinbox_value = actual_spinbox_value
 
         elif actual_spinbox_value < self.previous_spinbox_value:
-            self.hide_widget(self.label_array[actual_spinbox_value])
-            self.hide_widget(self.entry_array[actual_spinbox_value])
+            self.label_array[actual_spinbox_value].pack_forget()
+            self.entry_array[actual_spinbox_value].pack_forget()
             self.previous_spinbox_value = actual_spinbox_value
 
-        self.show_widget(self.answer_label)
-        self.show_widget(self.validate_button)
-        self.show_widget(self.back_button)
+        self.answer_label.pack()
+        self.validate_button.pack()
+        self.back_button.pack()

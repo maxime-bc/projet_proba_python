@@ -50,14 +50,6 @@ class Exercise2(tk.Frame):
 
         self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
 
-    @staticmethod
-    def hide_widget(event):
-        event.pack_forget()
-
-    @staticmethod
-    def show_widget(event):
-        event.pack()
-
     def validate(self):
 
         self.result = round_float(self.result)
@@ -66,8 +58,8 @@ class Exercise2(tk.Frame):
             given_result: float = float(self.answer_entry.get())
 
             if self.result == given_result:
-                self.hide_widget(self.validate_answer)
-                self.hide_widget(self.back_button)
+                self.validate_answer.pack_forget()
+                self.back_button.pack_forget()
 
                 self.controller.shared_data["score"] += self.exercise_points
                 self.controller.shared_data["max_score"] += self.exercise_points
@@ -83,11 +75,11 @@ class Exercise2(tk.Frame):
 
                 self.score_label.pack()
 
-                self.show_widget(self.back_button)
+                self.back_button.pack()
 
             else:
-                self.hide_widget(self.validate_answer)
-                self.hide_widget(self.back_button)
+                self.validate_answer.pack_forget()
+                self.back_button.pack_forget()
 
                 self.controller.shared_data["max_score"] += self.exercise_points
 
@@ -100,7 +92,7 @@ class Exercise2(tk.Frame):
 
                 self.score_label.pack()
 
-                self.show_widget(self.back_button)
+                self.back_button.pack()
 
         except ValueError:
             pass
@@ -108,10 +100,10 @@ class Exercise2(tk.Frame):
     def on_show_frame(self, event):
         # Generate a new exercise
 
-        self.hide_widget(self.message_label)
-        self.hide_widget(self.score_label)
-        self.hide_widget(self.validate_answer)
-        self.hide_widget(self.back_button)
+        self.message_label.pack_forget()
+        self.score_label.pack_forget()
+        self.validate_answer.pack_forget()
+        self.back_button.pack_forget()
 
         weight1 = self.controller.shared_data["ex2_weight1"]
         weight2 = self.controller.shared_data["ex2_weight2"]
