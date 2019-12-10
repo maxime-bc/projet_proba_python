@@ -9,3 +9,17 @@ TODO :
 TypeError: unsupported format string passed to NoneType.__format__
 - Sometimes blank screen
 -Fix quadratic equation selection
+
+## Installation
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ python3 setup.py install
+```
+
+## Usage
+
+```bash
+$ proba
+```

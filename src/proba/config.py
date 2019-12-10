@@ -1,5 +1,5 @@
 import tkinter as tk
-import src.menu
+import proba.menu
 
 TITLE_FONT = ('Verdana', 14)
 
@@ -65,7 +65,8 @@ class Config(tk.Frame):
         self.validate_button = tk.Button(self, text='Valider', command=self.validate)
         self.validate_button.pack()
 
-        self.back_button = tk.Button(self, text='Retour', command=lambda: self.controller.show_frame(src.menu.Menu))
+        self.back_button = tk.Button(self, text='Retour', command=lambda: self.controller.show_frame(
+            proba.menu.Menu))
         self.back_button.pack()
 
     def validate(self):

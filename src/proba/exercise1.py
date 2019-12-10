@@ -1,10 +1,10 @@
 import tkinter as tk
 
-from src.format import format_quadratic_equation
-import src.menu
-from src.quadratic_equations import solve_quadratic_equation
-from src.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE
-from src.utils import round_float
+from proba.format import format_quadratic_equation
+import proba.menu
+from proba.quadratic_equations import solve_quadratic_equation
+from proba.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE
+from proba.utils import round_float
 
 LARGE_FONT = ('Verdana', 12)
 
@@ -47,7 +47,7 @@ class Exercise1(tk.Frame):
             self.entry_array[index] = tk.Entry(self)
 
         self.validate_button = tk.Button(self, text='Valider', command=self.check_answers)
-        self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
+        self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(proba.menu.Menu))
 
         self.answer_text = tk.StringVar()
         self.answer_label = tk.Label(self, textvariable=self.answer_text)

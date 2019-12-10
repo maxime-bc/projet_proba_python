@@ -1,9 +1,9 @@
 import tkinter as tk
 
-from src.config import Config
-from src.exercise1 import Exercise1
-from src.exercise2 import Exercise2
-from src.menu import Menu
+from proba.config import Config
+from proba.exercise1 import Exercise1
+from proba.exercise2 import Exercise2
+from proba.menu import Menu
 
 
 class Application(tk.Tk):

@@ -1,13 +1,13 @@
 import tkinter as tk
 from math import isnan
 
-import src.menu
-from src.format import format_pow, format_inverse, format_cos, format_sin, format_tan, format_log
-from src.generate import generate_pow1, generate_pow2, generate_trigo, generate_log
-from src.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
-from src.rand import randrange_step
-from src.utils import round_float
-import src.exercise1
+import proba.menu
+from proba.format import format_pow, format_inverse, format_cos, format_sin, format_tan, format_log
+from proba.generate import generate_pow1, generate_pow2, generate_trigo, generate_log
+from proba.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
+from proba.rand import randrange_step
+from proba.utils import round_float
+import proba.exercise1
 
 LARGE_FONT = ('Verdana', 12)
 HARD_EXERCISE_POINTS: float = 1.5
@@ -55,7 +55,7 @@ class Exercise2(tk.Frame):
     def back(self):
         self.controller.shared_data["score"] = 0.0
         self.controller.shared_data["max_score"] = 0.0
-        self.controller.show_frame(src.menu.Menu)
+        self.controller.show_frame(proba.menu.Menu)
 
     def next(self):
 
@@ -64,10 +64,10 @@ class Exercise2(tk.Frame):
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
         if random < self.controller.shared_data["weight1"]:
-            self.controller.show_frame(src.exercise1.Exercise1)
+            self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:
-            self.controller.show_frame(src.exercise2.Exercise2)
+            self.controller.show_frame(proba.exercise2.Exercise2)
 
     def validate(self):
 

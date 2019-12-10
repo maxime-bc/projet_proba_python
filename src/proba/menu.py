@@ -1,9 +1,9 @@
 import tkinter as tk
 
-import src.exercise1
-import src.exercise2
-import src.config
-from src.rand import randrange_step
+import proba.exercise1
+import proba.exercise2
+import proba.config
+from proba.rand import randrange_step
 
 TITLE_FONT = ('Verdana', 14)
 
@@ -43,7 +43,7 @@ class Menu(tk.Frame):
         self.config_button.pack()
 
     def config(self):
-        self.controller.show_frame(src.config.Config)
+        self.controller.show_frame(proba.config.Config)
 
     def start(self):
 
@@ -58,7 +58,7 @@ class Menu(tk.Frame):
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
         if random < self.controller.shared_data["weight1"]:
-            self.controller.show_frame(src.exercise1.Exercise1)
+            self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:
-            self.controller.show_frame(src.exercise2.Exercise2)
+            self.controller.show_frame(proba.exercise2.Exercise2)
