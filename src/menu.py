@@ -36,8 +36,7 @@ class Menu(tk.Frame):
         self.start_button.pack_forget()
         self.config_button.pack_forget()
 
-        self.score_text.set('Score : {}/{}'.
-                            format(self.controller.shared_data["score"], self.controller.shared_data["max_score"]))
+        self.score_text.set('Meilleur score : {}'.format(self.controller.shared_data["best_score"]))
 
         self.score_label.pack()
         self.start_button.pack()

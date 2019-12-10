@@ -28,7 +28,8 @@ class Application(tk.Tk):
             "ex2_weight2": 5,
             "ex2_weight3": 5,
             "score": 0.0,
-            "max_score": 0.0
+            "max_score": 0.0,
+            "best_score": 0.0
         }
 
         self.frames = {}

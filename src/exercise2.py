@@ -7,6 +7,7 @@ from src.generate import generate_pow1, generate_pow2, generate_trigo, generate_
 from src.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
 from src.rand import randrange_step
 from src.utils import round_float
+import src.exercise1
 
 LARGE_FONT = ('Verdana', 12)
 HARD_EXERCISE_POINTS: float = 1.5
@@ -47,8 +48,26 @@ class Exercise2(tk.Frame):
         self.answer_entry = tk.Entry(self)
 
         self.validate_answer = tk.Button(self, text='Valider',  command=self.validate)
+        self.next_button = tk.Button(self, text='Continuer ?', command=self.next)
 
-        self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(src.menu.Menu))
+        self.back_button = tk.Button(self, text='Retour', command=self.back)
+
+    def back(self):
+        self.controller.shared_data["score"] = 0.0
+        self.controller.shared_data["max_score"] = 0.0
+        self.controller.show_frame(src.menu.Menu)
+
+    def next(self):
+
+        random: int = randrange_step(0, 10, 1)
+        print(random)
+        # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
+
+        if random < self.controller.shared_data["weight1"]:
+            self.controller.show_frame(src.exercise1.Exercise1)
+
+        else:
+            self.controller.show_frame(src.exercise2.Exercise2)
 
     def validate(self):
 
@@ -65,16 +84,26 @@ class Exercise2(tk.Frame):
                 self.controller.shared_data["max_score"] += self.exercise_points
 
                 self.message_text.set('Bravo ! En effet, cette intégrale vaut {:0.2f}.'.format(self.result))
+
                 self.message_label.pack()
 
-                self.score_text.set('+{} points, score : {}/{}'
-                                    .format(
-                                            self.exercise_points,
-                                            self.controller.shared_data["score"],
-                                            self.controller.shared_data["max_score"]))
+                if self.controller.shared_data["score"] > self.controller.shared_data["best_score"]:
+                    self.score_text.set('+{} points, score : {}/{} [Record battu !]'
+                                        .format(
+                                                self.exercise_points,
+                                                self.controller.shared_data["score"],
+                                                self.controller.shared_data["max_score"]))
+                    self.controller.shared_data["best_score"] = self.controller.shared_data["score"]
+
+                else:
+                    self.score_text.set('+{} points, score : {}/{}'
+                                        .format(
+                                                self.exercise_points,
+                                                self.controller.shared_data["score"],
+                                                self.controller.shared_data["max_score"]))
 
                 self.score_label.pack()
-
+                self.next_button.pack()
                 self.back_button.pack()
 
             else:
@@ -86,12 +115,14 @@ class Exercise2(tk.Frame):
                 self.message_text.set('Faux ! Cette intégrale vaut {:0.2f}.'.format(self.result))
                 self.message_label.pack()
 
-                self.score_text.set('Pas de points, score : {}/{}'
+                self.score_text.set('Série de points annulée, score : {}/{}'
                                     .format(self.controller.shared_data["score"],
                                             self.controller.shared_data["max_score"]))
+                self.controller.shared_data["score"] = 0.0
+                self.controller.shared_data["max_score"] = 0.0
 
                 self.score_label.pack()
-
+                self.next_button.pack()
                 self.back_button.pack()
 
         except ValueError:
@@ -103,6 +134,7 @@ class Exercise2(tk.Frame):
         self.message_label.pack_forget()
         self.score_label.pack_forget()
         self.validate_answer.pack_forget()
+        self.next_button.pack_forget()
         self.back_button.pack_forget()
 
         weight1 = self.controller.shared_data["ex2_weight1"]
