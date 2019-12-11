@@ -22,25 +22,21 @@ class Exercise1(tk.Frame):
         self.res1 = None
         self.res2 = None
         self.sol_no = None
-
-        frame_label = tk.Label(self, text="Exercice sur les équations du second degré", font=LARGE_FONT)
-        frame_label.pack(padx=10, pady=10)
-
         self.entry_array = [None] * 2
         self.label_array = [None] * 2
+
+        self.title_label = tk.Label(self, text="Exercice sur les équations du second degré", font=LARGE_FONT)
 
         self.equation_str = tk.StringVar()
         self.equation_label = tk.Label(self, textvariable=self.equation_str, font=LARGE_FONT)
         self.equation_label.pack(padx=10, pady=10)
 
-        sol_label = tk.Label(self, text="Nombre de solutions :", font=LARGE_FONT)
-        sol_label.pack()
+        self.sol_label = tk.Label(self, text="Nombre de solutions :", font=LARGE_FONT)
 
         self.initial_spinbox_value = tk.DoubleVar(value=0)
         self.previous_spinbox_value = 0
         self.sol_no_spinbox = tk.Spinbox(self, from_=0, to=2, textvariable=self.initial_spinbox_value,
                                          command=self.on_spinbox_changed, state='readonly')
-        self.sol_no_spinbox.pack()
 
         for index in range(0, 2):
             self.label_array[index] = tk.Label(self, text='Solution '+str(index+1))
@@ -87,6 +83,11 @@ class Exercise1(tk.Frame):
 
         self.equation_str.set('Equation du 2nd degré générée : {}\nRésoudre f(x) = 0'
                               .format(format_quadratic_equation(a, b, c)))
+
+        # Build window
+        self.title_label.pack()
+        self.sol_label.pack()
+
         self.equation_label.pack()
 
         self.answer_text.set('')

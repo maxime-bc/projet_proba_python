@@ -45,7 +45,8 @@ class Exercise2(tk.Frame):
 
         self.answer_label = tk.Label(self, text='Résultat :')
 
-        self.answer_entry = tk.Entry(self)
+        self.answer_text = tk.StringVar()
+        self.answer_entry = tk.Entry(self, textvar=self.answer_text)
 
         self.validate_answer = tk.Button(self, text='Valider',  command=self.validate)
         self.next_button = tk.Button(self, text='Continuer ?', command=self.next)
@@ -136,6 +137,7 @@ class Exercise2(tk.Frame):
         self.validate_answer.pack_forget()
         self.next_button.pack_forget()
         self.back_button.pack_forget()
+        self.answer_text.set('')
 
         weight1 = self.controller.shared_data["ex2_weight1"]
         weight2 = self.controller.shared_data["ex2_weight2"]
@@ -153,7 +155,7 @@ class Exercise2(tk.Frame):
 
             if random == 1:
                 pass
-                # self.result = self.pow1()
+                self.result = self.pow1()
 
             else:
                 self.result = self.pow2()
