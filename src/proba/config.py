@@ -60,14 +60,8 @@ class Config(tk.Frame):
         self.weight2_label = tk.Label(self, textvariable=self.ex2_weight3_text)
         self.weight2_label.pack()
 
-        # ------------------------
-
         self.validate_button = tk.Button(self, text='Valider', command=self.validate)
         self.validate_button.pack()
-
-        self.back_button = tk.Button(self, text='Retour', command=lambda: self.controller.show_frame(
-            proba.menu.Menu))
-        self.back_button.pack()
 
     def validate(self):
 
@@ -100,6 +94,8 @@ class Config(tk.Frame):
                         self.controller.shared_data["ex2_weight1"] = ex2_weight1
                         self.controller.shared_data["ex2_weight2"] = ex2_weight2
                         self.controller.shared_data["ex2_weight3"] = ex2_weight3
+
+                        self.controller.show_frame(proba.menu.Menu)
 
                     else:
                         print('Non3')

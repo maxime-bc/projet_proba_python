@@ -33,7 +33,7 @@ class Exercise1(tk.Frame):
 
         self.sol_label = tk.Label(self, text="Nombre de solutions :", font=LARGE_FONT)
 
-        self.initial_spinbox_value = tk.DoubleVar(value=0)
+        self.initial_spinbox_value = tk.IntVar(value=0)
         self.previous_spinbox_value = 0
         self.sol_no_spinbox = tk.Spinbox(self, from_=0, to=2, textvariable=self.initial_spinbox_value,
                                          command=self.on_spinbox_changed, state='readonly')
@@ -48,15 +48,9 @@ class Exercise1(tk.Frame):
         self.answer_text = tk.StringVar()
         self.answer_label = tk.Label(self, textvariable=self.answer_text)
 
-    def show_entries(self):
-        for index in range(0, int(self.sol_no_spinbox.get())):
-            self.entry_array[index].pack()
-            self.label_array[index].pack()
-
-        self.validate_button.pack()
-        self.back_button.pack()
-
     def hide_entries(self):
+        self.sol_label.pack_forget()
+        self.sol_no_spinbox.pack_forget()
         for index in range(0, int(self.sol_no_spinbox.get())):
             self.entry_array[index].pack_forget()
             self.label_array[index].pack_forget()
@@ -86,21 +80,26 @@ class Exercise1(tk.Frame):
 
         # Build window
         self.title_label.pack()
-        self.sol_label.pack()
-
         self.equation_label.pack()
+        self.sol_label.pack()
 
         self.answer_text.set('')
         self.answer_label.pack_forget()
 
-        self.set_text(self.entry_array[0], '')
-        self.set_text(self.entry_array[1], '')
-        self.initial_spinbox_value = tk.DoubleVar(value=0)
-        self.sol_no_spinbox.pack()
         self.entry_array[0].pack_forget()
-        self.label_array[1].pack_forget()
+        self.label_array[0].pack_forget()
+        self.set_text(self.entry_array[0], '')
 
+        self.entry_array[1].pack_forget()
+        self.label_array[1].pack_forget()
+        self.set_text(self.entry_array[1], '')
+
+        self.initial_spinbox_value.set('0')
+        self.previous_spinbox_value = 0
+        self.sol_no_spinbox.pack()
+        
         self.validate_button.pack()
+        self.back_button.pack_forget()
         self.back_button.pack()
 
         # DEBUG ONLY
