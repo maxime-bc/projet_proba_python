@@ -57,7 +57,7 @@ class Menu(tk.Frame):
         print(random)
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
-        if random < self.controller.shared_data["weight1"]:
+        if random <= self.controller.shared_data["weight1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:

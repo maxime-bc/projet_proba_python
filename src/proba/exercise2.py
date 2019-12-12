@@ -143,7 +143,7 @@ class Exercise2(tk.Frame):
         weight2 = self.controller.shared_data["ex2_weight2"]
         weight3 = self.controller.shared_data["ex2_weight3"]
 
-        # TODO: the same exercise can be repeated
+        # TODO: the same exercise can be repeatedcontroller.show_frame(proba.menu.Menu)
         random: float = randrange_step(0.0, 15.0, 1.0)
 
         if random <= weight1:
@@ -155,7 +155,7 @@ class Exercise2(tk.Frame):
 
             if random == 1:
                 pass
-                self.result = self.pow1()
+                # self.result = self.pow1()
 
             else:
                 self.result = self.pow2()

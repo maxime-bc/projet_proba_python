@@ -46,10 +46,13 @@ class Exercise1(tk.Frame):
 
         self.validate_button = tk.Button(self, text='Valider', command=self.check_answers)
         self.next_button = tk.Button(self, text='Continuer ?', command=self.next)
-        self.back_button = tk.Button(self, text='Retour', command=lambda: controller.show_frame(proba.menu.Menu))
+        self.back_button = tk.Button(self, text='Retour', command=self.back)
 
         self.answer_text = tk.StringVar()
         self.answer_label = tk.Label(self, textvariable=self.answer_text)
+
+        self.score_text = tk.StringVar()
+        self.score_label = tk.Label(self, textvar=self.score_text)
 
     def hide_entries(self):
         self.sol_label.pack_forget()
@@ -62,6 +65,7 @@ class Exercise1(tk.Frame):
 
     def show_answers(self):
         self.answer_label.pack()
+        self.score_label.pack()
         self.next_button.pack()
         self.back_button.pack()
 
@@ -69,6 +73,11 @@ class Exercise1(tk.Frame):
     def set_text(entry, text):
         entry.delete(0, tk.END)
         entry.insert(0, text)
+
+    def back(self):
+        self.controller.shared_data["score"] = 0.0
+        self.controller.shared_data["max_score"] = 0.0
+        self.controller.show_frame(proba.menu.Menu)
 
     def next(self):
 
@@ -98,6 +107,7 @@ class Exercise1(tk.Frame):
         self.title_label.pack()
         self.equation_label.pack()
         self.sol_label.pack()
+        self.score_label.pack_forget()
 
         self.answer_text.set('')
         self.answer_label.pack_forget()
@@ -130,14 +140,16 @@ class Exercise1(tk.Frame):
     def check_answers(self):
         print('Validating')
 
+        bad_answer: bool = False
         given_sol_no: float = int(self.sol_no_spinbox.get())
 
         if self.sol_no == given_sol_no:
             if self.sol_no == 0:
 
+                self.controller.shared_data["score"] += NORMAL_EXERCISE_POINTS
+                self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+
                 self.answer_text.set('Bravo ! \nEn effet, cette équation n\'a pas de solutions.\n')
-                self.score = self.score + 1.0
-                self.max_score = self.max_score + 1.0
                 self.hide_entries()
                 self.show_answers()
 
@@ -150,13 +162,14 @@ class Exercise1(tk.Frame):
                     if answer1 == rounded_res1:
                         self.answer_text.set('Bravo ! \nEn effet, cette équation possède une solution : '
                                              '{:0.2f}\n'.format(rounded_res1))
-                        self.score = self.score + 1.0
-                        self.max_score = self.max_score + 1.0
+                        self.controller.shared_data["score"] += NORMAL_EXERCISE_POINTS
+                        self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
 
                     else:
                         self.answer_text.set('Faux ! \nCette équation possède une solution : '
                                              '{:0.2f}\n'.format(rounded_res1))
-                        self.max_score = self.max_score + 1.0
+                        self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+                        bad_answer = True
 
                     self.hide_entries()
                     self.show_answers()
@@ -164,7 +177,8 @@ class Exercise1(tk.Frame):
                 except ValueError:
                     self.answer_text.set('Faux ! \nCette équation possède une solution : '
                                          '{:0.2f}\n'.format(rounded_res1))
-                    self.max_score = self.max_score + 1.0
+                    self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+                    bad_answer = True
 
                     self.hide_entries()
                     self.show_answers()
@@ -173,51 +187,77 @@ class Exercise1(tk.Frame):
                 rounded_res1 = round_float(self.res1)
                 rounded_res2 = round_float(self.res2)
 
-                if self.sol_no >= given_sol_no:
-                    try:
-                        answer1 = float(self.entry_array[0].get())
-                        answer2 = float(self.entry_array[1].get())
+                try:
+                    answer1 = float(self.entry_array[0].get())
+                    answer2 = float(self.entry_array[1].get())
 
-                        if answer1 == rounded_res1 and answer2 == rounded_res2:
+                    if answer1 == rounded_res1 and answer2 == rounded_res2:
+                        self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : '
+                                             '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                        self.controller.shared_data["score"] += NORMAL_EXERCISE_POINTS
+                        self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+
+                    else:
+
+                        if answer1 == rounded_res1 and answer2 == rounded_res1:
                             self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : '
                                                  '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
-                            self.score = self.score + 1.0
-                            self.max_score = self.max_score + 1.0
+                            self.controller.shared_data["score"] += NORMAL_EXERCISE_POINTS
+                            self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
 
                         else:
+                            self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
+                                                 '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                            self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+                            bad_answer = True
 
-                            if answer1 == rounded_res1 and answer2 == rounded_res1:
-                                self.answer_text.set('Bravo ! \nEn effet, cette équation possède deux solutions : '
-                                                     '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
-                                self.score = self.score + 1.0
-                                self.max_score = self.max_score + 1.0
-
-                            else:
-                                self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
-                                                     '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
-                                self.max_score = self.max_score + 1.0
-
-                        self.hide_entries()
-                        self.show_answers()
-
-                    except ValueError:
-                        self.answer_text.set('Faux ! \nCette équation possède une solution : '
-                                             '{:0.2f}\n'.format(rounded_res1))
-                        self.max_score = self.max_score + 1.0
-
-                        self.hide_entries()
-                        self.show_answers()
-
-                else:
-                    self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
-                                         '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
-                    self.max_score = self.max_score + 1.0
                     self.hide_entries()
                     self.show_answers()
+
+                except ValueError:
+                    self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
+                                         '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
+                    self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+
+                    self.hide_entries()
+                    self.show_answers()
+
+            self.controller.shared_data["score"] += self.score
+            self.controller.shared_data["max_score"] += self.max_score
+
+            if self.controller.shared_data["score"] > self.controller.shared_data["best_score"]:
+                self.score_text.set('+{} points, score : {}/{} [Record battu !]'
+                                    .format(
+                                            NORMAL_EXERCISE_POINTS,
+                                            self.controller.shared_data["score"],
+                                            self.controller.shared_data["max_score"]))
+                self.controller.shared_data["best_score"] = self.controller.shared_data["score"]
+
+            elif bad_answer is True:
+                self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+                self.score_text.set('Série de points annulée, score : {}/{}'
+                                    .format(self.controller.shared_data["score"],
+                                            self.controller.shared_data["max_score"]))
+                self.controller.shared_data["score"] = 0.0
+                self.controller.shared_data["max_score"] = 0.0
+
+            else:
+                self.score_text.set('+{} points, score : {}/{}'
+                                    .format(
+                                            NORMAL_EXERCISE_POINTS,
+                                            self.controller.shared_data["score"],
+                                            self.controller.shared_data["max_score"]))
+
         else:
             self.answer_text.set('Faux ! \nVous avez choisi {} solution(s), or cette équation possède {} solutions.\n'
                                  .format(given_sol_no, self.sol_no))
-            self.max_score = self.max_score + 1.0
+            self.controller.shared_data["max_score"] += 1.0
+
+            self.score_text.set('Série de points annulée, score : {}/{}'
+                                .format(self.controller.shared_data["score"],
+                                        self.controller.shared_data["max_score"]))
+            self.controller.shared_data["score"] = 0.0
+            self.controller.shared_data["max_score"] = 0.0
 
             self.hide_entries()
             self.show_answers()
