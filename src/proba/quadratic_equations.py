@@ -1,7 +1,6 @@
 from math import sqrt, fabs
 from typing import Tuple
-
-from proba.utils import round_float
+from proba.rand import round_float
 
 
 def two_real_root(delta: float, a: float, b: float) -> Tuple[float, float]:

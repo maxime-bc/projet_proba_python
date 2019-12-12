@@ -50,14 +50,13 @@ class Menu(tk.Frame):
         print('SCORE :' + str(self.controller.shared_data["score"]) + ', MAX SCORE : '
               + str(self.controller.shared_data["max_score"]))
 
-        print('WEIGHTS :'+str(self.controller.shared_data["weight1"]) + ' '
-              + str(self.controller.shared_data["weight2"]))
+        print('WEIGHTS :'+str(self.controller.shared_data["weight_ex1"]) + ' '
+              + str(self.controller.shared_data["weight_ex2"]))
 
-        random: int = randrange_step(0, 10, 1)
+        random: int = randrange_step(0, 100, 1)
         print(random)
-        # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
-        if random <= self.controller.shared_data["weight1"]:
+        if random <= self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:

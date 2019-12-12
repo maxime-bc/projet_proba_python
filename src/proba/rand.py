@@ -19,3 +19,7 @@ def randrange_exclude(excluded: float, start: float, stop: float, step: float) -
         rand = randrange_step(start, stop, step)
 
     return rand
+
+
+def round_float(x: float) -> float:
+    return round(x * 100.0) / 100.0

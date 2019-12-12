@@ -22,8 +22,8 @@ class Application(tk.Tk):
 
         # TODO : change weights
         self.shared_data = {
-            "weight1": 5,
-            "weight2": 5,
+            "weight_ex1": 50,
+            "weight_ex2": 50,
             "ex2_weight1": 5,
             "ex2_weight2": 5,
             "ex2_weight3": 5,

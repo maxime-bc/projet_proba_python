@@ -3,8 +3,7 @@ import tkinter as tk
 from proba.format import format_quadratic_equation
 import proba.menu
 from proba.quadratic_equations import solve_quadratic_equation
-from proba.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE
-from proba.utils import round_float
+from proba.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE, round_float
 
 LARGE_FONT = ('Verdana', 12)
 HARD_EXERCISE_POINTS: float = 1.5

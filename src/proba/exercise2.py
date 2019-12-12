@@ -5,8 +5,7 @@ import proba.menu
 from proba.format import format_pow, format_inverse, format_cos, format_sin, format_tan, format_log
 from proba.generate import generate_pow1, generate_pow2, generate_trigo, generate_log
 from proba.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
-from proba.rand import randrange_step
-from proba.utils import round_float
+from proba.rand import randrange_step, round_float
 import proba.exercise1
 
 LARGE_FONT = ('Verdana', 12)
