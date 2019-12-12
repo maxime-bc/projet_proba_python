@@ -13,6 +13,7 @@ TypeError: unsupported format string passed to NoneType.__format__
 ## Installation
 
 ```bash
+$ sudo apt install python3-tk
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ python3 setup.py install
