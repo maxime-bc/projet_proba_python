@@ -10,10 +10,18 @@ TypeError: unsupported format string passed to NoneType.__format__
 - Sometimes blank screen
 -Fix quadratic equation selection
 
+## Requirements
+
+Pyhton 3 with Tkinter
+
+```bash
+$ sudo apt install python3.7
+$ sudo apt install python3-tk
+```
+
 ## Installation
 
 ```bash
-$ sudo apt install python3-tk
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ python3 setup.py install
