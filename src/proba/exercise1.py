@@ -80,7 +80,7 @@ class Exercise1(tk.Frame):
 
     def next(self):
 
-        random: int = randrange_step(0, 10, 1)
+        random: int = randrange_step(0, 100, 1)
         print(random)
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 

@@ -24,9 +24,9 @@ class Application(tk.Tk):
         self.shared_data = {
             "weight_ex1": 50,
             "weight_ex2": 50,
-            "ex2_weight1": 5,
-            "ex2_weight2": 5,
-            "ex2_weight3": 5,
+            "ex2_weight1": 50,
+            "ex2_weight2": 50,
+            "ex2_weight3": 50,
             "score": 0.0,
             "max_score": 0.0,
             "best_score": 0.0

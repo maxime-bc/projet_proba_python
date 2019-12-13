@@ -4,6 +4,7 @@ from typing import Tuple
 import proba.menu
 
 TITLE_FONT = ('Verdana', 14)
+SUBTITLE_FONT = ('Verdana', 12)
 
 
 class Config(tk.Frame):
@@ -15,7 +16,7 @@ class Config(tk.Frame):
         frame_label = tk.Label(self, text="Configuration des poids des exercices :", font=TITLE_FONT)
         frame_label.pack()
 
-        self.exercises_weight_label = tk.Label(self, text='Poids entre l\'exercice 1 et 2 : ')
+        self.exercises_weight_label = tk.Label(self, text='Poids entre l\'exercice 1 et 2 : ', font=SUBTITLE_FONT)
         self.exercises_weight_label.pack()
 
         self.ex1_weight_label = tk.Label(self, text='Poids ex 1 : ')
@@ -43,7 +44,8 @@ class Config(tk.Frame):
         self.ex2_weight3_value = tk.IntVar()
         self.ex2_weight3_value.set(self.controller.shared_data["ex2_weight3"])
 
-        self.exercises_weight_label = tk.Label(self, text='Poids des types d\'intégrales de l\'ex 2 : ')
+        self.exercises_weight_label = tk.Label(self, text='Poids des types d\'intégrales de l\'ex 2 : ',
+                                               font=SUBTITLE_FONT)
         self.exercises_weight_label.pack()
 
         self.ex2_weight1_label = tk.Label(self, text='Poids des fonctions puissance :')
@@ -70,30 +72,28 @@ class Config(tk.Frame):
 
             if not (int(self.ex1_weight_entry.get()) == 0) or not (int(self.ex2_weight_entry.get()) == 0):
 
+                entry_vars = [int(self.ex1_weight_entry.get()), int(self.ex2_weight_entry.get())]
+
                 self.controller.shared_data["weight_ex1"], self.controller.shared_data["weight_ex2"] = \
-                    self.generate_ratio_two_weights(int(self.ex1_weight_entry.get()), int(self.ex2_weight_entry.get()))
+                    self.generate_ratio(entry_vars)
 
-                self.controller.shared_data["ex2_weight1"] = int(self.ex2_weight1_entry.get())
-                self.controller.shared_data["ex2_weight2"] = int(self.ex2_weight2_entry.get())
-                self.controller.shared_data["ex2_weight3"] = int(self.ex2_weight3_entry.get())
+                entry_vars = [int(self.ex2_weight1_entry.get()),
+                              int(self.ex2_weight2_entry.get()),
+                              int(self.ex2_weight3_entry.get())]
 
+                self.controller.shared_data["ex2_weight1"], self.controller.shared_data["ex2_weight2"], \
+                self.controller.shared_data["ex2_weight3"] = self.generate_ratio(entry_vars)
                 self.controller.show_frame(proba.menu.Menu)
 
         except ValueError:
             pass
 
-    def generate_ratio_two_weights(self, w1: int, w2: int) -> Tuple[int, int]:
+    def generate_ratio(self, weights: list):
 
-        w1, w2 = self.permute_bounds(w1, w2)
-        weight_sum: int = w1 + w2
+        weight_sum = sum(weights)
 
-        percentage1: int = round((w1 / weight_sum) * 100)
-        percentage2: int = round((w2 / weight_sum) * 100)
+        for i in range(0, len(weights)):
+            weights[i] = round((weights[i] / weight_sum) * 100)
+            pass
 
-        return percentage1, percentage2
-
-    def permute_bounds(self, a: int, b: int) -> Tuple[int, int]:
-        tmp: int = a
-        a = b
-        b = tmp
-        return a, b
+        return weights

@@ -59,7 +59,7 @@ class Exercise2(tk.Frame):
 
     def next(self):
 
-        random: int = randrange_step(0, 10, 1)
+        random: int = randrange_step(0, 100, 1)
         print(random)
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
@@ -142,8 +142,8 @@ class Exercise2(tk.Frame):
         weight2 = self.controller.shared_data["ex2_weight2"]
         weight3 = self.controller.shared_data["ex2_weight3"]
 
-        # TODO: the same exercise can be repeatedcontroller.show_frame(proba.menu.Menu)
-        random: float = randrange_step(0.0, 15.0, 1.0)
+        # TODO: the same exercise can be repeated
+        random: float = randrange_step(0, 100, 1)
 
         if random <= weight1:
 
@@ -165,14 +165,14 @@ class Exercise2(tk.Frame):
 
             print('Fonction trigonométrique\n')
 
-            random: int = randrange_step(1.0, 3.0, 1.0)
+            random: int = randrange_step(0, 2, 1.0)
             self.exercise_points = NORMAL_EXERCISE_POINTS
             self.title_text.set('Exercice sur les intégrales (+ {} points)'.format(self.exercise_points))
 
-            if random == 1:
+            if random == 0:
                 self.result = self.trigo1()
 
-            elif random == 2:
+            elif random == 1:
                 self.result = self.trigo2()
 
             else:

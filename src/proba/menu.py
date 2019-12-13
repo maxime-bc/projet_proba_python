@@ -53,6 +53,9 @@ class Menu(tk.Frame):
         print('WEIGHTS :'+str(self.controller.shared_data["weight_ex1"]) + ' '
               + str(self.controller.shared_data["weight_ex2"]))
 
+        print('WEIGHTS EX 2 :'+str(self.controller.shared_data["ex2_weight1"]) + ' '
+              + str(self.controller.shared_data["ex2_weight2"]) + ' ' + str(self.controller.shared_data["ex2_weight3"]))
+
         random: int = randrange_step(0, 100, 1)
         print(random)
 
