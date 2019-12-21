@@ -7,6 +7,8 @@ from proba.rand import randrange_step
 
 TITLE_FONT = ('Verdana', 14)
 
+'''This module displays the menu.'''
+
 
 class Menu(tk.Frame):
 

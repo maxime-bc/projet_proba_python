@@ -5,6 +5,8 @@ from proba.exercise1 import Exercise1
 from proba.exercise2 import Exercise2
 from proba.menu import Menu
 
+'''This module manages the display of the different frames used in the program.'''
+
 
 class Application(tk.Tk):
 

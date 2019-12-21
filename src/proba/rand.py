@@ -1,5 +1,6 @@
 import random
 
+'''This module groups functions used to generate random numbers for exercises.'''
 
 START_VALUE: float = -10.0
 STOP_VALUE: float = 10.0

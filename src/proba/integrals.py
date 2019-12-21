@@ -1,5 +1,7 @@
 from math import log, fabs, sin, cos
 
+'''This module groups functions used to calculate integrals.'''
+
 
 def integral_pow1(a: float, b: float, c: float, d: float, alpha: float) -> float:
     return 1.0/(c*(alpha+1.0))*(pow(b*c-d, (alpha+1.0))-pow(a*c-d, (alpha+1.0)))

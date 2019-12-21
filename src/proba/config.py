@@ -1,7 +1,7 @@
 import tkinter as tk
-from typing import Tuple
-
 import proba.menu
+
+'''This module displays the configuration menu, where users can choose weights for the different exercises.'''
 
 TITLE_FONT = ('Verdana', 14)
 SUBTITLE_FONT = ('Verdana', 12)

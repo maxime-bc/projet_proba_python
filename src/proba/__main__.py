@@ -1,5 +1,7 @@
 from proba.application import Application
 
+'''This module is the entry point of the program'''
+
 
 def main():
     app = Application()

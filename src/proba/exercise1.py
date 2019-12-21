@@ -5,6 +5,8 @@ import proba.menu
 from proba.quadratic_equations import solve_quadratic_equation
 from proba.rand import randrange_step, randrange_exclude, START_VALUE, STOP_VALUE, STEP_VALUE, round_float
 
+'''This module display a randomly generated exercise about quadratic equations in a frame. '''
+
 LARGE_FONT = ('Verdana', 12)
 HARD_EXERCISE_POINTS: float = 1.5
 NORMAL_EXERCISE_POINTS: float = 1.0
@@ -84,7 +86,7 @@ class Exercise1(tk.Frame):
         print(random)
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
 
-        if random < self.controller.shared_data["weight1"]:
+        if random < self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:

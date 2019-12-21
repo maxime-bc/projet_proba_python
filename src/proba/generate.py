@@ -1,6 +1,8 @@
 from typing import Tuple
 from proba.rand import randrange_exclude, randrange_step, START_VALUE, STOP_VALUE, STEP_VALUE
 
+'''This module groups functions generating random values for each type of exercises.'''
+
 
 def generate_pow1() -> Tuple[float, float, float, float, float]:
 

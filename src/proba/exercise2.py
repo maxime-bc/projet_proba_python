@@ -4,9 +4,12 @@ from math import isnan
 import proba.menu
 from proba.format import format_pow, format_inverse, format_cos, format_sin, format_tan, format_log
 from proba.generate import generate_pow1, generate_pow2, generate_trigo, generate_log
-from proba.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, integral_log
+from proba.integrals import integral_pow1, integral_pow2, integral_trigo1, integral_trigo2, integral_trigo3, \
+    integral_log
 from proba.rand import randrange_step, round_float
 import proba.exercise1
+
+'''This module display a randomly generated exercise about integrals in a frame.'''
 
 LARGE_FONT = ('Verdana', 12)
 HARD_EXERCISE_POINTS: float = 1.5
@@ -62,8 +65,9 @@ class Exercise2(tk.Frame):
         random: int = randrange_step(0, 100, 1)
         print(random)
         # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
+        # si random = 0 et weight_ex1 = 0, l'ex 1 se lance ???
 
-        if random < self.controller.shared_data["weight1"]:
+        if random < self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:
@@ -161,11 +165,11 @@ class Exercise2(tk.Frame):
 
             print('{:0.2f}\n'.format(self.result))
 
-        elif weight1 < random <= (weight1 + weight2):
+        elif weight1 < random <= weight2:
 
             print('Fonction trigonométrique\n')
 
-            random: int = randrange_step(0, 2, 1.0)
+            random: int = randrange_step(0, 2, 1)
             self.exercise_points = NORMAL_EXERCISE_POINTS
             self.title_text.set('Exercice sur les intégrales (+ {} points)'.format(self.exercise_points))
 
@@ -180,7 +184,7 @@ class Exercise2(tk.Frame):
 
             print('{:0.2f}\n'.format(self.result))
 
-        elif random > weight3:
+        else:
             print('Fonction logarithmique\n')
             self.exercise_points = NORMAL_EXERCISE_POINTS
             self.title_text.set('Exercice sur les intégrales (+ {} point(s))'.format(self.exercise_points))

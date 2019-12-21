@@ -2,6 +2,8 @@ from math import sqrt, fabs
 from typing import Tuple
 from proba.rand import round_float
 
+'''This module groups functions used to solve quadratic equations'''
+
 
 def two_real_root(delta: float, a: float, b: float) -> Tuple[float, float]:
     return (-b-sqrt(fabs(delta)))/(2.0*a), (-b+sqrt(fabs(delta)))/(2.0*a)

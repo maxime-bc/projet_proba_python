@@ -1,5 +1,7 @@
 from math import fabs
 
+'''This module groups functions generating strings representations of quadratic equations and integrals.'''
+
 
 def format_quadratic_equation(a: float, b: float, c: float) -> str:
 
