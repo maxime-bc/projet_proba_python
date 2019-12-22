@@ -23,5 +23,10 @@ def integral_trigo3(a: float, b: float, c: float) -> float:
     return (-(log(fabs(cos(b*c))) - log(fabs(cos(a*c)))))/c
 
 
+# Formula changed because it wasn't working
 def integral_log(a: float, b: float, c: float) -> float:
-    return b*log(b*c) - a*log(a*c) - c*(b - a)
+    return b*log(b*c) - a*log(a*c) - (b - a)
+
+# Base formula :
+# def integral_log(a: float, b: float, c: float) -> float:
+#    return b*log(b*c) - a*log(a*c) - c*(b - a)

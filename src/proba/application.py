@@ -22,7 +22,6 @@ class Application(tk.Tk):
         container.rowconfigure(0, weight=1)
         container.columnconfigure(0, weight=1)
 
-        # TODO : change weights
         self.shared_data = {
             "weight_ex1": 50,
             "weight_ex2": 50,
@@ -30,8 +29,7 @@ class Application(tk.Tk):
             "ex2_weight2": 50,
             "ex2_weight3": 50,
             "score": 0.0,
-            "max_score": 0.0,
-            "best_score": 0.0
+            "max_score": 0.0
         }
 
         self.frames = {}

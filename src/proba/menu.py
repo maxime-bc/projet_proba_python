@@ -21,9 +21,6 @@ class Menu(tk.Frame):
         self.title_label = tk.Label(self, text='Générateur d\'exercices', font=TITLE_FONT)
         self.title_label.pack(padx=10, pady=10)
 
-        self.score_text = tk.StringVar()
-        self.score_label = tk.Label(self, textvar=self.score_text)
-
         self.start_button = tk.Button(self, text='Commencer', command=self.start)
         self.start_button.pack()
 
@@ -33,14 +30,9 @@ class Menu(tk.Frame):
     def on_show_frame(self, event):
         # update the score
 
-        print('Showed')
-
         self.start_button.pack_forget()
         self.config_button.pack_forget()
 
-        self.score_text.set('Meilleur score : {}'.format(self.controller.shared_data["best_score"]))
-
-        self.score_label.pack()
         self.start_button.pack()
         self.config_button.pack()
 
@@ -49,17 +41,10 @@ class Menu(tk.Frame):
 
     def start(self):
 
-        print('SCORE :' + str(self.controller.shared_data["score"]) + ', MAX SCORE : '
-              + str(self.controller.shared_data["max_score"]))
+        self.controller.shared_data["score"] = 0.0
+        self.controller.shared_data["max_score"] = 0.0
 
-        print('WEIGHTS :'+str(self.controller.shared_data["weight_ex1"]) + ' '
-              + str(self.controller.shared_data["weight_ex2"]))
-
-        print('WEIGHTS EX 2 :'+str(self.controller.shared_data["ex2_weight1"]) + ' '
-              + str(self.controller.shared_data["ex2_weight2"]) + ' ' + str(self.controller.shared_data["ex2_weight3"]))
-
-        random: int = randrange_step(0, 100, 1)
-        print(random)
+        random: int = randrange_step(1, 100, 1)
 
         if random <= self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)

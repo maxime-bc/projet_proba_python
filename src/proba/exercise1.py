@@ -77,16 +77,13 @@ class Exercise1(tk.Frame):
 
     def back(self):
         self.controller.shared_data["score"] = 0.0
-        self.controller.shared_data["max_score"] = 0.0
         self.controller.show_frame(proba.menu.Menu)
 
     def next(self):
 
-        random: int = randrange_step(0, 100, 1)
-        print(random)
-        # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
+        random: int = randrange_step(1, 100, 1)
 
-        if random < self.controller.shared_data["weight_ex1"]:
+        if random <= self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:
@@ -101,7 +98,7 @@ class Exercise1(tk.Frame):
 
         self.res1, self.res2, self.sol_no = solve_quadratic_equation(a, b, c)
 
-        self.equation_str.set('Equation du 2nd degré générée : {}\nRésoudre f(x) = 0'
+        self.equation_str.set('Equation du 2nd degré générée : {}\nRésoudre f(x) = 0 (2 chiffres après la virgule)'
                               .format(format_quadratic_equation(a, b, c)))
 
         # Build window
@@ -131,15 +128,7 @@ class Exercise1(tk.Frame):
         self.back_button.pack_forget()
         self.back_button.pack()
 
-        # DEBUG ONLY
-        print('NB SOL : '+str(self.sol_no))
-        if self.sol_no == 1:
-            print('SOL : {}'.format(self.res1))
-        elif self.sol_no == 2:
-            print('SOLS : {} {}'.format(self.res1, self.res2))
-
     def check_answers(self):
-        print('Validating')
 
         bad_answer: bool = False
         given_sol_no: float = int(self.sol_no_spinbox.get())
@@ -219,6 +208,7 @@ class Exercise1(tk.Frame):
                     self.answer_text.set('Faux ! \nCette équation possède deux solutions : '
                                          '{:0.2f} et {:0.2f}\n'.format(rounded_res1, rounded_res2))
                     self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
+                    bad_answer = True
 
                     self.hide_entries()
                     self.show_answers()
@@ -226,21 +216,10 @@ class Exercise1(tk.Frame):
             self.controller.shared_data["score"] += self.score
             self.controller.shared_data["max_score"] += self.max_score
 
-            if self.controller.shared_data["score"] > self.controller.shared_data["best_score"]:
-                self.score_text.set('+{} points, score : {}/{} [Record battu !]'
-                                    .format(
-                                            NORMAL_EXERCISE_POINTS,
-                                            self.controller.shared_data["score"],
-                                            self.controller.shared_data["max_score"]))
-                self.controller.shared_data["best_score"] = self.controller.shared_data["score"]
-
-            elif bad_answer is True:
-                self.controller.shared_data["max_score"] += NORMAL_EXERCISE_POINTS
-                self.score_text.set('Série de points annulée, score : {}/{}'
+            if bad_answer is True:
+                self.score_text.set('Aucun point, score : {}/{}'
                                     .format(self.controller.shared_data["score"],
                                             self.controller.shared_data["max_score"]))
-                self.controller.shared_data["score"] = 0.0
-                self.controller.shared_data["max_score"] = 0.0
 
             else:
                 self.score_text.set('+{} points, score : {}/{}'
@@ -254,11 +233,9 @@ class Exercise1(tk.Frame):
                                  .format(given_sol_no, self.sol_no))
             self.controller.shared_data["max_score"] += 1.0
 
-            self.score_text.set('Série de points annulée, score : {}/{}'
+            self.score_text.set('Aucun point, score : {}/{}'
                                 .format(self.controller.shared_data["score"],
                                         self.controller.shared_data["max_score"]))
-            self.controller.shared_data["score"] = 0.0
-            self.controller.shared_data["max_score"] = 0.0
 
             self.hide_entries()
             self.show_answers()

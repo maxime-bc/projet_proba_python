@@ -62,12 +62,9 @@ class Exercise2(tk.Frame):
 
     def next(self):
 
-        random: int = randrange_step(0, 100, 1)
-        print(random)
-        # TODO: if weight for ex1 is fixed at 10, it can sometimes launch ex 2
-        # si random = 0 et weight_ex1 = 0, l'ex 1 se lance ???
+        random: int = randrange_step(1, 100, 1)
 
-        if random < self.controller.shared_data["weight_ex1"]:
+        if random <= self.controller.shared_data["weight_ex1"]:
             self.controller.show_frame(proba.exercise1.Exercise1)
 
         else:
@@ -91,20 +88,11 @@ class Exercise2(tk.Frame):
 
                 self.message_label.pack()
 
-                if self.controller.shared_data["score"] > self.controller.shared_data["best_score"]:
-                    self.score_text.set('+{} points, score : {}/{} [Record battu !]'
-                                        .format(
-                                                self.exercise_points,
-                                                self.controller.shared_data["score"],
-                                                self.controller.shared_data["max_score"]))
-                    self.controller.shared_data["best_score"] = self.controller.shared_data["score"]
-
-                else:
-                    self.score_text.set('+{} points, score : {}/{}'
-                                        .format(
-                                                self.exercise_points,
-                                                self.controller.shared_data["score"],
-                                                self.controller.shared_data["max_score"]))
+                self.score_text.set('+{} points, score : {}/{}'
+                                    .format(
+                                            self.exercise_points,
+                                            self.controller.shared_data["score"],
+                                            self.controller.shared_data["max_score"]))
 
                 self.score_label.pack()
                 self.next_button.pack()
@@ -119,11 +107,9 @@ class Exercise2(tk.Frame):
                 self.message_text.set('Faux ! Cette intégrale vaut {:0.2f}.'.format(self.result))
                 self.message_label.pack()
 
-                self.score_text.set('Série de points annulée, score : {}/{}'
+                self.score_text.set('Aucun point, score : {}/{}'
                                     .format(self.controller.shared_data["score"],
                                             self.controller.shared_data["max_score"]))
-                self.controller.shared_data["score"] = 0.0
-                self.controller.shared_data["max_score"] = 0.0
 
                 self.score_label.pack()
                 self.next_button.pack()
@@ -146,28 +132,22 @@ class Exercise2(tk.Frame):
         weight2 = self.controller.shared_data["ex2_weight2"]
         weight3 = self.controller.shared_data["ex2_weight3"]
 
-        # TODO: the same exercise can be repeated
         random: float = randrange_step(0, 100, 1)
 
-        if random <= weight1:
+        if 0 < random <= weight1:
 
-            print('Fonction puissance\n')
-            random: float = randrange_step(1.0, 2.0, 1.0)
+            random: float = randrange_step(0, 1, 1)
             self.exercise_points = HARD_EXERCISE_POINTS
             self.title_text.set('Exercice sur les intégrales (+ {} points)'.format(self.exercise_points))
 
-            if random == 1:
+            if random == 0:
                 pass
-                # self.result = self.pow1()
+                self.result = self.pow1()
 
             else:
                 self.result = self.pow2()
 
-            print('{:0.2f}\n'.format(self.result))
-
-        elif weight1 < random <= weight2:
-
-            print('Fonction trigonométrique\n')
+        elif weight1 < random <= (weight1 + weight2):
 
             random: int = randrange_step(0, 2, 1)
             self.exercise_points = NORMAL_EXERCISE_POINTS
@@ -182,15 +162,11 @@ class Exercise2(tk.Frame):
             else:
                 self.result = self.trigo3()
 
-            print('{:0.2f}\n'.format(self.result))
+        elif (weight1 + weight2) < random <= 100:
 
-        else:
-            print('Fonction logarithmique\n')
             self.exercise_points = NORMAL_EXERCISE_POINTS
             self.title_text.set('Exercice sur les intégrales (+ {} point(s))'.format(self.exercise_points))
             self.result = self.log1()
-
-            print('{:0.2f}\n'.format(self.result))
 
         self.title_label.pack(padx=10, pady=10)
         self.integral_bounds_label.pack()
@@ -203,7 +179,9 @@ class Exercise2(tk.Frame):
     def pow1(self) -> float:
         a, b, c, d, alpha = generate_pow1()
         res = integral_pow1(a, b, c, d, alpha)
-        while isnan(res):
+
+        while isinstance(res, complex):
+            a, b, c, d, alpha = generate_pow1()
             res = integral_pow1(a, b, c, d, alpha)
 
         self.integral_bounds_text.set(self.header(a, b))
@@ -267,4 +245,4 @@ class Exercise2(tk.Frame):
 
     @staticmethod
     def header(a: float, b: float) -> str:
-        return 'Calculez l\'intégrale f(x)dx allant de {:0.1f} à {:0.1f} avec :\n'.format(a, b)
+        return 'Calculez l\'intégrale f(x)dx allant de {:0.1f} à {:0.1f} (2 chiffres après la virgule) avec :\n'.format(a, b)
