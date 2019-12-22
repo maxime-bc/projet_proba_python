@@ -11,6 +11,8 @@ $ sudo apt install python3-tk
 
 ## Installation
 
+Dans le dossier `projet_proba_python`, faire :
+
 ```bash
 $ python3 -m venv venv
 $ source venv/bin/activate
@@ -18,6 +20,8 @@ $ python3 setup.py install
 ```
 
 ## Usage
+
+Dans le dossier `projet_proba_python`, faire :
 
 ```bash
 $ proba
